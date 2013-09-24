@@ -46,7 +46,7 @@ You will find two files in the data folder CivicSpace US and GeoPostcodes. The f
 
 Import models and accessories:
 
-    from zipgeo.models import Zip
+    from distance.models import Zip
     from django.contrib.gis.measure import D
 
 
