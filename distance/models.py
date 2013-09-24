@@ -91,6 +91,7 @@ class DistanceAbstractModel(models.Model):
     def set_location(self, zip_code):
         self.location = Zip.objects.get(code=zip_code).location
 
+    @property
     def distance_obj(self):
         return D(m=self.distance)
 
