@@ -13,7 +13,7 @@ env:
 
 install:
   - pip install $DJANGO
-  - pip install django-localeflavors --use-mirrors
+  - pip install django-localflavor --use-mirrors
   - export PYTHONPATH=.
 
 script:
