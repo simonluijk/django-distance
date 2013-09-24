@@ -13,7 +13,7 @@ env:
 
 install:
   - pip install $DJANGO
-  - pip install django-localflavor --use-mirrors
+  - pip install psycopg2 django-localflavor --use-mirrors
   - export PYTHONPATH=.
 
 script:
