@@ -17,7 +17,7 @@ install:
   - export PYTHONPATH=.
 
 script:
-  - python PACKAGE/runtests/runtests.py
+  - python distance/runtests/runtests.py
 
 before_script:
   - psql -c 'create database dev_db;' -U postgres
