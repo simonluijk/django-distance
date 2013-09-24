@@ -1,0 +1,35 @@
+[
+{
+    "pk": 1, 
+    "model": "distance.zip", 
+    "fields": {
+        "code": "0", 
+        "city": "None", 
+        "state": "NY", 
+        "latitude": 40.880877,
+        "longitude": -73.300298 
+    }
+},
+{
+    "pk": 2, 
+    "model": "distance.zip", 
+    "fields": {
+        "code": "1", 
+        "city": "None", 
+        "state": "NY", 
+        "latitude": 40.880976,
+        "longitude": -73.300299 
+    }
+},
+{
+    "pk": 3, 
+    "model": "distance.zip", 
+    "fields": {
+        "code": "2", 
+        "city": "None", 
+        "state": "NY", 
+        "latitude": 40.889979,
+        "longitude": -73.329290 
+    }
+}
+]
