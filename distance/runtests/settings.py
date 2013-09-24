@@ -22,6 +22,20 @@ DATABASES = {
     }
 }
 
+import os
+
+TRAVIS = os.environ.get('TRAVIS')
+if TRAVIS:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '127.0.0.1',
+            'NAME': 'dev_db',
+            'USER': 'postgres',
+            'PASSWORD': '',
+        }
+    }
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
