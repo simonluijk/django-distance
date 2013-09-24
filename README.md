@@ -38,7 +38,7 @@ Then run `python manage.py syncdb`
 
 # Import zip data
 
-Import zip data with `python manage.py import_zip [path to csv data file]`
+Import zip data with `python manage.py import_zipdata [path to csv data file]`
 
 You will find two files in the data folder CivicSpace US and GeoPostcodes. The first being a free data-set derived from the US Census 1999, 2000 and 2003. The latter is a sample data-set from http://www.geopostcodes.com/ where you can purchase the full data-set.
 
