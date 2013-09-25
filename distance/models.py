@@ -10,18 +10,19 @@ except ImportError:
     from localflavor.us.models import USStateField
 
 
-class DistanceFrom(Aggregate):
+class Distance(Aggregate):
     is_computed = True
     sql_function = None
-    sql_template = ("6371000 * acos( cos( radians(%(t_lat)f) ) * "
-                    "cos( radians( latitude ) ) * "
-                    "cos( radians( longitude ) - radians(%(t_lon)f) ) + "
-                    "sin( radians(%(t_lat)f) ) * "
-                    "sin( radians( latitude ) ) )")
+    sql_template = ("6371000 * acos( cos( radians(%(lat)f) ) * "
+                    "cos( radians( %(field_lat)s ) ) * "
+                    "cos( radians( %(field_long)s ) - radians(%(long)f) ) + "
+                    "sin( radians(%(lat)f) ) * "
+                    "sin( radians( %(field_lat)s ) ) )")
 
-    def __init__(self, lookup, **extra):
+    def __init__(self, pnt, **extra):
         self.lookup = "id"
-        self.pnt = lookup
+        extra.update({"long": pnt["longitude"],
+                      "lat": pnt["latitude"]})
         self.extra = extra
 
     def _default_alias(self):
@@ -29,18 +30,22 @@ class DistanceFrom(Aggregate):
     default_alias = property(_default_alias)
 
     def add_to_query(self, query, alias, col, source, is_summary):
-        super(DistanceFrom, self).__init__(col, source, is_summary,
-                                           **self.extra)
+        super(Distance, self).__init__(col, source, is_summary, **self.extra)
         query.aggregate_select[alias] = self
 
     def as_sql(self, qn, connection):
-        return self.sql_template % {"t_lon": self.pnt["longitude"],
-                                    "t_lat": self.pnt["latitude"]}
+        table = self.col[0]
+        self.extra.update({
+            "field_lat": '.'.join([qn(table), qn("latitude")]),
+            "field_long": '.'.join([qn(table), qn("longitude")])
+        })
+
+        return super(Distance, self).as_sql(qn, connection)
 
 
 class DistanceQuerySet(models.query.QuerySet):
     def distance(self, pnt):
-        return self.annotate(distance=DistanceFrom(pnt))
+        return self.annotate(distance=Distance(pnt))
 
     def within(self, pnt, distance1, distance2=None):
         qs = self.distance(pnt)
