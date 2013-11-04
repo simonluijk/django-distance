@@ -5,9 +5,9 @@ from django.db.models.sql.aggregates import Aggregate
 from django.contrib.gis.measure import D
 
 try:
-    from django.contrib.localflavor.us.models import USStateField
-except ImportError:
     from localflavor.us.models import USStateField
+except ImportError:
+    from django.contrib.localflavor.us.models import USStateField
 
 
 class Distance(Aggregate):
