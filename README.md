@@ -52,8 +52,8 @@ Import models and accessories:
 
 Query zip codes within 50 miles:
 
-    myzip = Zip.objects.get(code="94129")
-    zips = Zip.objects.within(myzip.location, D(mi=50))
+    myzip = Zip.distance.get(code="94129")
+    zips = Zip.distance.within(myzip.location, D(mi=50))
 
 or
 
@@ -62,8 +62,8 @@ or
 
 Query zip codes between 50 and 100 miles:
 
-    myzip = Zip.objects.get(code="94129")
-    zips = Zip.objects.within(myzip.location, D(mi=50), D(mi=100))
+    myzip = Zip.distance.get(code="94129")
+    zips = Zip.distance.within(myzip.location, D(mi=50), D(mi=100))
 
 or
 
